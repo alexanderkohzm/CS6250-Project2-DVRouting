@@ -1,9 +1,11 @@
+from math import dist
 # Distance Vector project for CS 6250: Computer Networks
 #
 # This defines a DistanceVector (specialization of the Node class)
-# that can run the Bellman-Ford algorithm. The TODOs are all related 
+import dis
+# that can run the Bellman-Ford algorithm. The TODOs are all related
 # to implementing BF. Students should modify this file as necessary,
-# guided by the TODO comments and the assignment instructions. This 
+# guided by the TODO comments and the assignment instructions. This
 # is the only file that needs to be modified to complete the project.
 #
 # Student code should NOT access the following members, otherwise they may violate
@@ -20,21 +22,37 @@ from helpers import *
 
 
 class DistanceVector(Node):
-    
+
     def __init__(self, name, topolink, outgoing_links, incoming_links):
         """ Constructor. This is run once when the DistanceVector object is
         created at the beginning of the simulation. Initializing data structure(s)
         specific to a DV node is done here."""
 
         super(DistanceVector, self).__init__(name, topolink, outgoing_links, incoming_links)
-        
+
         # TODO: Create any necessary data structure(s) to contain the Node's internal state / distance vector data
+
+        # should keep track of the NODES that are linked to this node
+        # the WEIGHTS of the path (min -50, max 50). -99 is equivalent of negative infinity
+        # need to have some way to determine if there is an infinite negative cycle traversal
+
+        # Data Structure to track distance vectors
+        # array of objects. nodeName: string, value: number
+        #
+        # Condition for 99 - publish messages. If the distance is -99, stop publishing
+
+        # we only want to send messages to incoming links/UPSTREAM neighbours only. E.g. AA --> AD. But doesn't care about AB --> AA
+
+        self.distance_vector_table = {
+            self.name: 0
+        }
+
 
     def send_initial_messages(self):
         """ This is run once at the beginning of the simulation, after all
         DistanceVector objects are created and their links to each other are
         established, but before any of the rest of the simulation begins. You
-        can have nodes send out their initial DV advertisements here. 
+        can have nodes send out their initial DV advertisements here.
 
         Remember that links points to a list of Neighbor data structure.  Access
         the elements with .name or .weight """
@@ -42,32 +60,85 @@ class DistanceVector(Node):
         # TODO - Each node needs to build a message and send it to each of its neighbors
         # HINT: Take a look at the skeleton methods provided for you in Node.py
 
+        # print('This is incoming links: ', self.name, self.incoming_links[0].name)
+        # Incoming Links[0] is AB. This means that AB --> AA
+        # Since we want to publish to AD, we should be sending out to our outgoing links
+
+        # Message format -> (origin node, origin node distance vector)
+        # we only want to send out to the UPSTREAM neighbours
+        # e.g. AA --> AD. So AA will send a message to AD
+
+        # first, populate the distance table
+        # for outgoing_link in self.outgoing_links:
+        #     name = outgoing_link.name
+        #     self.distance_vector_table[name] = 0
+
+        for outgoing_link in self.outgoing_links:
+            message = (outgoing_link.name, 0)
+            self.messages.append(message)
+        print('This is after: ', self.name, self.messages)
+
+
     def process_BF(self):
         """ This is run continuously (repeatedly) during the simulation. DV
         messages from other nodes are received here, processed, and any new DV
         messages that need to be sent to other nodes as a result are sent. """
 
+        updated_distances = []
         # Implement the Bellman-Ford algorithm here.  It must accomplish two tasks below:
-        # TODO 1. Process queued messages       
-        for msg in self.messages:            
-            pass
-        
+        # TODO 1. Process queued messages
+
+        print('This is self.messages: ', self.name, self.messages)
+        # for msg in self.messages:
+        #     # calculate cost to origin
+        #     destination, distance_vector_table = msg
+        #     if destination == self.name:
+        #         continue
+
+        #     for key, distance_vector in distance_vector_table.items():
+        #         if key == self.name:
+        #             continue
+        #         else:
+        #             existing_cost = self.distance_vector_table.get(key, "")
+        #             if existing_cost == "":
+        #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
+        #                 self.distance_vector_table[key] = int(neighbour_weight)
+        #                 # updated_distances.append((self.name, {key: neighbour_weight}))
+        #             else:
+        #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
+        #                 if existing_cost > distance_vector + neighbour_weight:
+        #                     self.distance_vector_table[key] =  int(min(existing_cost, (distance_vector + neighbour_weight)))
+
+
         # Empty queue
         self.messages = []
 
-        # TODO 2. Send neighbors updated distances               
+        print("This is updated distance vector table: ", self.distance_vector_table)
+
+        # if len(updated_distances) > 0:
+        #     for name in self.neighbor_names:
+        #         # Send out messages
+        #         for updated_distance in updated_distances:
+        #             self.send_msg(updated_distance,name)
+
 
     def log_distances(self):
-        """ This function is called immedately after process_BF each round.  It 
+        """ This function is called immedately after process_BF each round.  It
         prints distances to the console and the log file in the following format (no whitespace either end):
-        
+
         A:(A,0) (B,1) (C,-2)
-        
+
         Where:
         A is the node currently doing the logging (self),
         B and C are neighbors, with vector weights 1 and 2 respectively
         NOTE: A0 shows that the distance to self is 0 """
-        
+
         # TODO: Use the provided helper function add_entry() to accomplish this task (see helpers.py).
-        # An example call that which prints the format example text above (hardcoded) is provided.        
-        add_entry("A", "(A,0) (B,1) (C,-2)")        
+        # An example call that which prints the format example text above (hardcoded) is provided.
+        # add_entry("A", "(A,0) (B,1) (C,-2)")
+
+        constructed_string = ""
+
+        for entry in self.outgoing_links:
+            constructed_string += f"({entry.name},{self.distance_vector_table[entry.name]}) "
+        add_entry(self.name, constructed_string)
