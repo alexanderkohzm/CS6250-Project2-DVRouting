@@ -1,7 +1,6 @@
 # Distance Vector project for CS 6250: Computer Networks
 #
 # This defines a DistanceVector (specialization of the Node class)
-import dis
 # that can run the Bellman-Ford algorithm. The TODOs are all related
 # to implementing BF. Students should modify this file as necessary,
 # guided by the TODO comments and the assignment instructions. This
@@ -126,7 +125,7 @@ class DistanceVector(Node):
         # print("This is updated distance vector table: ", self.distance_vector_table)
         # print('This is updated_distance: ', updated_distances)
         if updated == True:
-            incoming_link_names = [link.name for link in self.incoming_links]
+            # incoming_link_names = [link.name for link in self.incoming_links]
             # print(f"I am node: {self.name}, I am updating my links: {incoming_link_names}")
             for incoming_link in self.incoming_links:
                 # tell the incoming links that there is a shorter distance
