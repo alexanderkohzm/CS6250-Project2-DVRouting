@@ -72,7 +72,7 @@ class DistanceVector(Node):
             # Message = (sending_node, destination_name, distance)
             message = (self.name, outgoing_link.name, 0)
             self.messages.append(message)
-        print('This is after: ', self.name, self.messages)
+        # print('This is after: ', self.name, self.messages)
 
 
     def process_BF(self):
@@ -91,6 +91,9 @@ class DistanceVector(Node):
             # get neighbour weight
             sending_node, destination, published_distance = msg
 
+            if published_distance <= BREAK_LIMIT:
+                continue
+
             if self.distance_vector_table.get(destination, "") == "":
 
                 result = self.get_outgoing_neighbor_weight(destination)
@@ -101,8 +104,8 @@ class DistanceVector(Node):
                     updated = True
                 elif result != "Node Not Found":
                     name, neighbour_weight = result
-                    if neighbour_weight >= BREAK_LIMIT:
-                        continue
+                    # if neighbour_weight >= BREAK_LIMIT:
+                    #     continue
                     self.distance_vector_table[destination] = int(neighbour_weight)
                     updated = True
 

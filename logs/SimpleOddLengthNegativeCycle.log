@@ -1,5 +1,10 @@
-AA:(AA,0)
-AB:(AB,0)
-AD:(AD,0)
-CC:(CC,0)
+AA:(AA,0) (AD,-2)
+AB:(AB,0) (AA,-1) (CC,0) (AD,-3)
+AD:(AD,0) (AB,1) (AA,0) (CC,1)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-1)
+AB:(AB,0) (AA,-1) (CC,0) (AD,-3)
+AD:(AD,0) (AB,1) (AA,0) (CC,1)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
 -----
