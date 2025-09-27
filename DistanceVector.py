@@ -101,6 +101,8 @@ class DistanceVector(Node):
                     updated = True
                 elif result != "Node Not Found":
                     name, neighbour_weight = result
+                    if neighbour_weight >= BREAK_LIMIT:
+                        continue
                     self.distance_vector_table[destination] = int(neighbour_weight)
                     updated = True
 
