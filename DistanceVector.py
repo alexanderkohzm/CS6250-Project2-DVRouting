@@ -74,7 +74,10 @@ class DistanceVector(Node):
         #     self.distance_vector_table[name] = 0
 
         for outgoing_link in self.outgoing_links:
-            message = (outgoing_link.name, 0)
+            ## I THINK MESSAGE needs to have ORIGIN, DESTINATION, DISTANCE
+            ## It can't just be ORIGIN, DISTANCE (i.e. it must be 3, not 2)
+            # Message = (sending_node, destination_name, distance)
+            message = (self.name, outgoing_link.name, 0)
             self.messages.append(message)
         print('This is after: ', self.name, self.messages)
 
@@ -84,42 +87,49 @@ class DistanceVector(Node):
         messages from other nodes are received here, processed, and any new DV
         messages that need to be sent to other nodes as a result are sent. """
 
-        updated_distances = []
         # Implement the Bellman-Ford algorithm here.  It must accomplish two tasks below:
         # TODO 1. Process queued messages
 
         print('This is self.messages: ', self.name, self.messages)
-        # for msg in self.messages:
-        #     # calculate cost to origin
-        #     destination, distance_vector_table = msg
-        #     if destination == self.name:
-        #         continue
+        updated = False
+        for msg in self.messages:
+            # get neighbour weight
+            sending_node, destination, published_distance = msg
 
-        #     for key, distance_vector in distance_vector_table.items():
-        #         if key == self.name:
-        #             continue
-        #         else:
-        #             existing_cost = self.distance_vector_table.get(key, "")
-        #             if existing_cost == "":
-        #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
-        #                 self.distance_vector_table[key] = int(neighbour_weight)
-        #                 # updated_distances.append((self.name, {key: neighbour_weight}))
-        #             else:
-        #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
-        #                 if existing_cost > distance_vector + neighbour_weight:
-        #                     self.distance_vector_table[key] =  int(min(existing_cost, (distance_vector + neighbour_weight)))
+            if self.distance_vector_table.get(destination, "") == "":
+                ## WARNING --> UNACCOUNTED BRANCH
+                result = self.get_outgoing_neighbor_weight(destination)
+                if result != "Node Not Found":
+                    name, neighbour_weight = result
+                    self.distance_vector_table[destination] = int(neighbour_weight)
+                    updated = True
+
+            else:
+                # perform the comparison
+                current_cost = self.distance_vector_table.get(destination, "")
+                result = self.get_outgoing_neighbor_weight(sending_node)
+                if result == "Node Not Found":
+                    raise Exception(f"Node not found. self.name: {self.name}, outgoing_link: {destination}")
+                # comparison_cost = distance + self.get_outgoing_neighbor_weight(sending_node)
+                else:
+                    name, neighour_weight = self.get_outgoing_neighbor_weight(sending_node)
+                    comparison_cost = published_distance + neighour_weight
+                    if comparison_cost < current_cost:
+                        self.distance_vector_table[destination] = comparison_cost
+                        updated = True
 
 
         # Empty queue
         self.messages = []
 
-        print("This is updated distance vector table: ", self.distance_vector_table)
-
-        # if len(updated_distances) > 0:
-        #     for name in self.neighbor_names:
-        #         # Send out messages
-        #         for updated_distance in updated_distances:
-        #             self.send_msg(updated_distance,name)
+        # print("This is updated distance vector table: ", self.distance_vector_table)
+        # print('This is updated_distance: ', updated_distances)
+        if updated == True:
+            for incoming_link in self.incoming_links:
+                # tell the incoming links that there is a shorter distance
+                for key, value in self.distance_vector_table.items():
+                    message = (self.name, key, value)
+                    self.send_msg(message, incoming_link.name)
 
 
     def log_distances(self):
@@ -137,8 +147,31 @@ class DistanceVector(Node):
         # An example call that which prints the format example text above (hardcoded) is provided.
         # add_entry("A", "(A,0) (B,1) (C,-2)")
 
-        constructed_string = ""
+        vectors = []
 
-        for entry in self.outgoing_links:
-            constructed_string += f"({entry.name},{self.distance_vector_table[entry.name]}) "
-        add_entry(self.name, constructed_string)
+        for key, value in self.distance_vector_table.items():
+            vector = f"({key},{value})"
+            vectors.append(vector)
+        string = " ".join(vectors)
+        add_entry(self.name, string)
+
+
+    # for msg in self.messages:
+    #     # calculate cost to origin
+    #     destination, distance_vector_table = msg
+    #     if destination == self.name:
+    #         continue
+
+    #     for key, distance_vector in distance_vector_table.items():
+    #         if key == self.name:
+    #             continue
+    #         else:
+    #             existing_cost = self.distance_vector_table.get(key, "")
+    #             if existing_cost == "":
+    #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
+    #                 self.distance_vector_table[key] = int(neighbour_weight)
+    #                 # updated_distances.append((self.name, {key: neighbour_weight}))
+    #             else:
+    #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
+    #                 if existing_cost > distance_vector + neighbour_weight:
+    #                     self.distance_vector_table[key] =  int(min(existing_cost, (distance_vector + neighbour_weight)))

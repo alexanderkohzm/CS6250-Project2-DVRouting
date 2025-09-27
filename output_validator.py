@@ -7,7 +7,7 @@
 # Improper node label format
 # Improper node link weight format
 # Distance vector to self not included in DVT
-# 
+#
 #
 # Copyright 26 August 2015 Michael D. Brown
 
@@ -26,12 +26,12 @@ def validateStudentOutput(filename):
     with open(filename) as f:
         for line in f:
             if line != ROUND_SEP:
-                line = line[0:len(line)-1]          
+                line = line[0:len(line)-1]
                 validateLine(line)
             global line_number
             line_number = line_number + 1
-            
-            
+
+
 def intermediateStepCheck(filename):
     totalSteps=0
     with open(filename) as f:
@@ -48,13 +48,13 @@ def validateLine(line):
     if (colonIndex == 0):
         print(("Invalid Output[L" + str(line_number) + "]: Node label should be at least 1 character. (" + node + ")"))
         return
-    
+
     node = line[0:colonIndex]
     neighbors = line[colonIndex+1:]
-        
+
     if not node.isalpha():
         print(("Invalid Output[L" + str(line_number) + "]: Node labels should only contain alphabetic characters. (" + node + ")"))
-    
+
     neighbors_pairs = neighbors.split(' ')
     for pair in neighbors_pairs:
         if (pair[0] != '(' or pair[-1] != ')'):
@@ -62,7 +62,7 @@ def validateLine(line):
         split = pair[1:-1].split(',')
         if (not split[0].isalpha() or not split[1].lstrip('-').isnumeric()):
             print('Invalid output, please ensure your output contains (node,distance) pairs')
-    
+
     neighbors = neighbors.replace(' ', '').replace('(', '').replace(',', '').rstrip(')')
     neighbors = neighbors.split(')')
 
@@ -80,7 +80,7 @@ def validateNeighbors(neighbors, node):
             weightIndex = m.start()
             label = neighbor[:weightIndex]
             weight = str(neighbor[weightIndex:]) # removed for Python 3, was causing error: , 'utf-8')
-            
+
             if not label.isalpha():
                 print(("Invalid Output[L" + str(line_number) +
                        "]: Node labels should only contain alphabetic characters. (" + label + ")"))
@@ -103,15 +103,13 @@ def validWeight(weightString):
         return weightString.isnumeric()
 
 # Script Start
-# Step 1: check for argument 
+# Step 1: check for argument
 if len(sys.argv) != 2:
     print("Syntax:")
-    print("    python output_validator.py <log_file>")    
+    print("    python output_validator.py <log_file>")
     exit()
 
 # Step 2: Run validator
 print(("Output validation initiated on " + sys.argv[1] + ":"))
 validateStudentOutput(sys.argv[1])
 print("Output validation complete.")
-
-
