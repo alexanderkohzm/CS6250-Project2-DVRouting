@@ -1,4 +1,3 @@
-from math import dist
 # Distance Vector project for CS 6250: Computer Networks
 #
 # This defines a DistanceVector (specialization of the Node class)
@@ -68,11 +67,6 @@ class DistanceVector(Node):
         # we only want to send out to the UPSTREAM neighbours
         # e.g. AA --> AD. So AA will send a message to AD
 
-        # first, populate the distance table
-        # for outgoing_link in self.outgoing_links:
-        #     name = outgoing_link.name
-        #     self.distance_vector_table[name] = 0
-
         for outgoing_link in self.outgoing_links:
             ## I THINK MESSAGE needs to have ORIGIN, DESTINATION, DISTANCE
             ## It can't just be ORIGIN, DISTANCE (i.e. it must be 3, not 2)
@@ -89,17 +83,24 @@ class DistanceVector(Node):
 
         # Implement the Bellman-Ford algorithm here.  It must accomplish two tasks below:
         # TODO 1. Process queued messages
+        #
+        BREAK_LIMIT = -99
 
-        print('This is self.messages: ', self.name, self.messages)
+        # print('This is self.messages: ', self.name, self.messages)
         updated = False
         for msg in self.messages:
             # get neighbour weight
             sending_node, destination, published_distance = msg
 
             if self.distance_vector_table.get(destination, "") == "":
-                ## WARNING --> UNACCOUNTED BRANCH
+
                 result = self.get_outgoing_neighbor_weight(destination)
-                if result != "Node Not Found":
+                if result == "Node Not Found":
+                    # if not a neighbour, we need to add it
+                    distance_to_sending_node = self.distance_vector_table[sending_node]
+                    self.distance_vector_table[destination] = distance_to_sending_node + published_distance
+                    updated = True
+                elif result != "Node Not Found":
                     name, neighbour_weight = result
                     self.distance_vector_table[destination] = int(neighbour_weight)
                     updated = True
@@ -114,7 +115,7 @@ class DistanceVector(Node):
                 else:
                     name, neighour_weight = self.get_outgoing_neighbor_weight(sending_node)
                     comparison_cost = published_distance + neighour_weight
-                    if comparison_cost < current_cost:
+                    if comparison_cost < current_cost and comparison_cost < BREAK_LIMIT:
                         self.distance_vector_table[destination] = comparison_cost
                         updated = True
 
@@ -125,10 +126,13 @@ class DistanceVector(Node):
         # print("This is updated distance vector table: ", self.distance_vector_table)
         # print('This is updated_distance: ', updated_distances)
         if updated == True:
+            incoming_link_names = [link.name for link in self.incoming_links]
+            # print(f"I am node: {self.name}, I am updating my links: {incoming_link_names}")
             for incoming_link in self.incoming_links:
                 # tell the incoming links that there is a shorter distance
                 for key, value in self.distance_vector_table.items():
                     message = (self.name, key, value)
+                    # print(f"this is message: {message}", )
                     self.send_msg(message, incoming_link.name)
 
 
@@ -154,24 +158,3 @@ class DistanceVector(Node):
             vectors.append(vector)
         string = " ".join(vectors)
         add_entry(self.name, string)
-
-
-    # for msg in self.messages:
-    #     # calculate cost to origin
-    #     destination, distance_vector_table = msg
-    #     if destination == self.name:
-    #         continue
-
-    #     for key, distance_vector in distance_vector_table.items():
-    #         if key == self.name:
-    #             continue
-    #         else:
-    #             existing_cost = self.distance_vector_table.get(key, "")
-    #             if existing_cost == "":
-    #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
-    #                 self.distance_vector_table[key] = int(neighbour_weight)
-    #                 # updated_distances.append((self.name, {key: neighbour_weight}))
-    #             else:
-    #                 _, neighbour_weight = self.get_outgoing_neighbor_weight(key)
-    #                 if existing_cost > distance_vector + neighbour_weight:
-    #                     self.distance_vector_table[key] =  int(min(existing_cost, (distance_vector + neighbour_weight)))
