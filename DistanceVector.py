@@ -85,43 +85,57 @@ class DistanceVector(Node):
         #
         BREAK_LIMIT = -99
 
-        # print('This is self.messages: ', self.name, self.messages)
         updated = False
         for msg in self.messages:
             # get neighbour weight
             sending_node, destination, published_distance = msg
 
-            if published_distance <= BREAK_LIMIT:
+            if destination == self.name:
+                continue
+            if published_distance == BREAK_LIMIT and self.distance_vector_table[destination] != BREAK_LIMIT:
+                self.distance_vector_table[destination] = BREAK_LIMIT
+                updated = True
                 continue
 
             if self.distance_vector_table.get(destination, "") == "":
 
                 result = self.get_outgoing_neighbor_weight(destination)
                 if result == "Node Not Found":
+                    # (A)
                     # if not a neighbour, we need to add it
                     distance_to_sending_node = self.distance_vector_table[sending_node]
                     self.distance_vector_table[destination] = distance_to_sending_node + published_distance
                     updated = True
+                    # print(f'(A) Updated: {self.name,destination}: {self.distance_vector_table}')
                 elif result != "Node Not Found":
+                    # (B)
                     name, neighbour_weight = result
-                    # if neighbour_weight >= BREAK_LIMIT:
-                    #     continue
                     self.distance_vector_table[destination] = int(neighbour_weight)
                     updated = True
-
+                    # print(f'(B) Updated: {self.name,destination}: {self.distance_vector_table}')
             else:
                 # perform the comparison
+
                 current_cost = self.distance_vector_table.get(destination, "")
+
                 result = self.get_outgoing_neighbor_weight(sending_node)
                 if result == "Node Not Found":
                     raise Exception(f"Node not found. self.name: {self.name}, outgoing_link: {destination}")
-                # comparison_cost = distance + self.get_outgoing_neighbor_weight(sending_node)
                 else:
-                    name, neighour_weight = self.get_outgoing_neighbor_weight(sending_node)
-                    comparison_cost = published_distance + neighour_weight
-                    if comparison_cost < current_cost and comparison_cost < BREAK_LIMIT:
-                        self.distance_vector_table[destination] = comparison_cost
-                        updated = True
+                    name, neighbour_weight = self.get_outgoing_neighbor_weight(sending_node)
+                    comparison_cost = published_distance + neighbour_weight
+                    print('Self.Name, Sending Node, destination, neighbour_weight, published_distance', [self.name, sending_node, destination, neighbour_weight, published_distance])
+                    if comparison_cost < current_cost and current_cost != BREAK_LIMIT:
+                        # (C)
+                        if comparison_cost < BREAK_LIMIT:
+                            self.distance_vector_table[destination] = BREAK_LIMIT
+                            print(f'(C) Updated: {self.name,destination}: {self.distance_vector_table}')
+                            updated = True
+                        else:
+                            # (D)
+                            self.distance_vector_table[destination] = comparison_cost
+                            print(f'(D) Updated: {self.name,destination}: {self.distance_vector_table}')
+                            updated = True
 
 
         # Empty queue
@@ -130,14 +144,17 @@ class DistanceVector(Node):
         # print("This is updated distance vector table: ", self.distance_vector_table)
         # print('This is updated_distance: ', updated_distances)
         if updated == True:
-            # incoming_link_names = [link.name for link in self.incoming_links]
-            # print(f"I am node: {self.name}, I am updating my links: {incoming_link_names}")
-            for incoming_link in self.incoming_links:
-                # tell the incoming links that there is a shorter distance
-                for key, value in self.distance_vector_table.items():
-                    message = (self.name, key, value)
-                    # print(f"this is message: {message}", )
-                    self.send_msg(message, incoming_link.name)
+            self.publish_message(self.incoming_links, self.distance_vector_table)
+
+    def publish_message(self, incoming_links, distance_vector_table):
+        # incoming_link_names = [link.name for link in incoming_links]
+        # print(f"I am node: {self.name}, I am updating my links: {incoming_link_names}")
+        for incoming_link in incoming_links:
+            # tell the incoming links that there is a shorter distance
+            for key, value in distance_vector_table.items():
+                message = (self.name, key, value)
+                # print('This is the message i am sending: ', message)
+                self.send_msg(message, incoming_link.name)
 
 
     def log_distances(self):

@@ -1,10 +1,260 @@
 AA:(AA,0) (AD,-2)
-AB:(AB,0) (AA,-1) (CC,0) (AD,-3)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,0)
 AD:(AD,0) (AB,1) (AA,0) (CC,1)
 CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
 -----
 AA:(AA,0) (AD,-2) (AB,-1) (CC,-1)
-AB:(AB,0) (AA,-1) (CC,0) (AD,-3)
-AD:(AD,0) (AB,1) (AA,0) (CC,1)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-2)
+AD:(AD,0) (AB,1) (AA,0) (CC,-1)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-3)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-4)
+AD:(AD,0) (AB,1) (AA,0) (CC,-3)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-5)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-6)
+AD:(AD,0) (AB,1) (AA,0) (CC,-5)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-7)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-8)
+AD:(AD,0) (AB,1) (AA,0) (CC,-7)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-9)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-10)
+AD:(AD,0) (AB,1) (AA,0) (CC,-9)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-11)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-12)
+AD:(AD,0) (AB,1) (AA,0) (CC,-11)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-13)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-14)
+AD:(AD,0) (AB,1) (AA,0) (CC,-13)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-15)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-16)
+AD:(AD,0) (AB,1) (AA,0) (CC,-15)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-17)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-18)
+AD:(AD,0) (AB,1) (AA,0) (CC,-17)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-19)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-20)
+AD:(AD,0) (AB,1) (AA,0) (CC,-19)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-21)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-22)
+AD:(AD,0) (AB,1) (AA,0) (CC,-21)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-23)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-24)
+AD:(AD,0) (AB,1) (AA,0) (CC,-23)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-25)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-26)
+AD:(AD,0) (AB,1) (AA,0) (CC,-25)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-27)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-28)
+AD:(AD,0) (AB,1) (AA,0) (CC,-27)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-29)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-30)
+AD:(AD,0) (AB,1) (AA,0) (CC,-29)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-31)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-32)
+AD:(AD,0) (AB,1) (AA,0) (CC,-31)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-33)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-34)
+AD:(AD,0) (AB,1) (AA,0) (CC,-33)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-35)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-36)
+AD:(AD,0) (AB,1) (AA,0) (CC,-35)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-37)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-38)
+AD:(AD,0) (AB,1) (AA,0) (CC,-37)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-39)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-40)
+AD:(AD,0) (AB,1) (AA,0) (CC,-39)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-41)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-42)
+AD:(AD,0) (AB,1) (AA,0) (CC,-41)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-43)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-44)
+AD:(AD,0) (AB,1) (AA,0) (CC,-43)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-45)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-46)
+AD:(AD,0) (AB,1) (AA,0) (CC,-45)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-47)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-48)
+AD:(AD,0) (AB,1) (AA,0) (CC,-47)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-49)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-50)
+AD:(AD,0) (AB,1) (AA,0) (CC,-49)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-51)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-52)
+AD:(AD,0) (AB,1) (AA,0) (CC,-51)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-53)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-54)
+AD:(AD,0) (AB,1) (AA,0) (CC,-53)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-55)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-56)
+AD:(AD,0) (AB,1) (AA,0) (CC,-55)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-57)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-58)
+AD:(AD,0) (AB,1) (AA,0) (CC,-57)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-59)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-60)
+AD:(AD,0) (AB,1) (AA,0) (CC,-59)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-61)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-62)
+AD:(AD,0) (AB,1) (AA,0) (CC,-61)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-63)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-64)
+AD:(AD,0) (AB,1) (AA,0) (CC,-63)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-65)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-66)
+AD:(AD,0) (AB,1) (AA,0) (CC,-65)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-67)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-68)
+AD:(AD,0) (AB,1) (AA,0) (CC,-67)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-69)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-70)
+AD:(AD,0) (AB,1) (AA,0) (CC,-69)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-71)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-72)
+AD:(AD,0) (AB,1) (AA,0) (CC,-71)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-73)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-74)
+AD:(AD,0) (AB,1) (AA,0) (CC,-73)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-75)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-76)
+AD:(AD,0) (AB,1) (AA,0) (CC,-75)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-77)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-78)
+AD:(AD,0) (AB,1) (AA,0) (CC,-77)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-79)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-80)
+AD:(AD,0) (AB,1) (AA,0) (CC,-79)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-81)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-82)
+AD:(AD,0) (AB,1) (AA,0) (CC,-81)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-83)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-84)
+AD:(AD,0) (AB,1) (AA,0) (CC,-83)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-85)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-86)
+AD:(AD,0) (AB,1) (AA,0) (CC,-85)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-87)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-88)
+AD:(AD,0) (AB,1) (AA,0) (CC,-87)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-89)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-90)
+AD:(AD,0) (AB,1) (AA,0) (CC,-89)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-91)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-92)
+AD:(AD,0) (AB,1) (AA,0) (CC,-91)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-93)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-94)
+AD:(AD,0) (AB,1) (AA,0) (CC,-93)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-95)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-96)
+AD:(AD,0) (AB,1) (AA,0) (CC,-95)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-97)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-98)
+AD:(AD,0) (AB,1) (AA,0) (CC,-97)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-99)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-99)
+AD:(AD,0) (AB,1) (AA,0) (CC,-99)
+CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
+-----
+AA:(AA,0) (AD,-2) (AB,-1) (CC,-99)
+AB:(AB,0) (AA,-1) (AD,-3) (CC,-99)
+AD:(AD,0) (AB,1) (AA,0) (CC,-99)
 CC:(CC,0) (AB,0) (AA,-1) (AD,-3)
 -----
