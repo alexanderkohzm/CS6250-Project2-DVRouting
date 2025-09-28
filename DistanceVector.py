@@ -72,7 +72,6 @@ class DistanceVector(Node):
             # Message = (sending_node, destination_name, distance)
             message = (self.name, outgoing_link.name, 0)
             self.messages.append(message)
-        # print('This is after: ', self.name, self.messages)
 
 
     def process_BF(self):
@@ -106,13 +105,11 @@ class DistanceVector(Node):
                     distance_to_sending_node = self.distance_vector_table[sending_node]
                     self.distance_vector_table[destination] = distance_to_sending_node + published_distance
                     updated = True
-                    # print(f'(A) Updated: {self.name,destination}: {self.distance_vector_table}')
                 elif result != "Node Not Found":
                     # (B)
                     name, neighbour_weight = result
                     self.distance_vector_table[destination] = int(neighbour_weight)
                     updated = True
-                    # print(f'(B) Updated: {self.name,destination}: {self.distance_vector_table}')
             else:
                 # perform the comparison
 
@@ -123,37 +120,29 @@ class DistanceVector(Node):
                     raise Exception(f"Node not found. self.name: {self.name}, outgoing_link: {destination}")
                 else:
                     name, neighbour_weight = self.get_outgoing_neighbor_weight(sending_node)
-                    comparison_cost = published_distance + neighbour_weight
-                    print('Self.Name, Sending Node, destination, neighbour_weight, published_distance', [self.name, sending_node, destination, neighbour_weight, published_distance])
-                    if comparison_cost < current_cost and current_cost != BREAK_LIMIT:
+                    comparison_cost = published_distance + int(neighbour_weight)
+                    if int(comparison_cost) < int(current_cost) and current_cost != BREAK_LIMIT:
                         # (C)
                         if comparison_cost < BREAK_LIMIT:
                             self.distance_vector_table[destination] = BREAK_LIMIT
-                            print(f'(C) Updated: {self.name,destination}: {self.distance_vector_table}')
                             updated = True
                         else:
                             # (D)
                             self.distance_vector_table[destination] = comparison_cost
-                            print(f'(D) Updated: {self.name,destination}: {self.distance_vector_table}')
                             updated = True
 
 
         # Empty queue
         self.messages = []
 
-        # print("This is updated distance vector table: ", self.distance_vector_table)
-        # print('This is updated_distance: ', updated_distances)
         if updated == True:
             self.publish_message(self.incoming_links, self.distance_vector_table)
 
     def publish_message(self, incoming_links, distance_vector_table):
-        # incoming_link_names = [link.name for link in incoming_links]
-        # print(f"I am node: {self.name}, I am updating my links: {incoming_link_names}")
         for incoming_link in incoming_links:
             # tell the incoming links that there is a shorter distance
             for key, value in distance_vector_table.items():
                 message = (self.name, key, value)
-                # print('This is the message i am sending: ', message)
                 self.send_msg(message, incoming_link.name)
 
 

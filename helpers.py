@@ -30,7 +30,7 @@ def add_entry(switch, logstring):
 def finish_round():
     global logfile
     global current_logs
-    
+
     indices = list(current_logs.keys())
     if ALPHABETIZE:
         indices = sorted(indices)
